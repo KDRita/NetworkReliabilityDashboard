@@ -35,30 +35,49 @@ electra_project/
 │   ├── __init__.py
 
 │   ├── settings.py             # Configuration du projet Django
+
 │   ├── urls.py                 # Routes principales de l’application
+
 │   ├── wsgi.py / asgi.py       # Déploiement du serveur
 │
 ├── network_reliability/        # Application Django principale
+
 │   ├── __init__.py
+
 │   ├── admin.py                # Interface d'administration Django
+
 │   ├── apps.py                 # Configuration de l’application Django
+
 │   ├── models.py               # Modèles de base de données Django
+
 │   ├── views.py                # Logique de traitement des requêtes
+
 │   ├── network_analysis.py      # Création et inférence des DBNs
+
 │   ├── neural_network.py        # Construction et entraînement du modèle ML
+
 │   ├── templates/
+
 │   │   ├── index.html           # Interface utilisateur
+
 │   ├── static/
 │   │   ├── css/styles.css       # Styles CSS
+
 │   │   ├── js/scripts.js        # Scripts JavaScript
 │
 ├── data/                       # Données utilisées pour l'analyse
+
 │   ├── ieee_9_nodes_reliability.csv
+
 │   ├── ieee_14_nodes_reliability.csv
+
 │
 ├── manage.py                    # Script de gestion Django
+
 ├── electra_project.spec          # Spécification du projet (déploiement)
+
 ├── requirements.txt              # Dépendances du projet
+
 ├── run_waitress.py               # Script pour exécuter l’application avec Waitress
 
 # 🚀 Installation et Exécution
