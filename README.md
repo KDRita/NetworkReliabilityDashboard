@@ -86,19 +86,25 @@ electra_project/
 1️⃣ Cloner le projet
 
 git clone https://github.com/ton_profil/electra_project.git
+
 cd electra_project
 
 2️⃣ Créer un environnement virtuel et installer les dépendances
 
 python -m venv venv
+
 source venv/bin/activate  # Pour Mac/Linux
+
 venv\Scripts\activate     # Pour Windows
+
 pip install -r requirements.txt
 
 3️⃣ Appliquer les migrations et démarrer le serveur
 
 python manage.py migrate
+
 python manage.py runserver
+
 L'application sera accessible sur http://127.0.0.1:8000/
 
 # 📊 Fonctionnalités
