@@ -39,6 +39,7 @@ electra_project/
 │   ├── urls.py                 # Routes principales de l’application
 
 │   ├── wsgi.py / asgi.py       # Déploiement du serveur
+
 │
 ├── network_reliability/        # Application Django principale
 
