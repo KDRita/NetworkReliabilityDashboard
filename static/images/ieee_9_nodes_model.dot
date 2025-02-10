@@ -1,0 +1,21 @@
+digraph G {
+bgcolor=transparent;
+size=5;
+"N8" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(7) N8"];
+"N9" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(8) N9"];
+"N6" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(5) N6"];
+"N2" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(1) N2"];
+"N5" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(4) N5"];
+"N3" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(2) N3"];
+"N4" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(3) N4"];
+"N7" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(6) N7"];
+"N1" [fillcolor="#404040", fontcolor=white, style=filled, tooltip="(0) N1"];
+"N1" -> "N2"  [color="#4A4A4A", fontsize=10, label="", penwidth=1, tooltip="0&nbsp;&rarr;&nbsp;1"];
+"N6" -> "N9"  [color="#4A4A4A", fontsize=10, label="", penwidth=1, tooltip="5&nbsp;&rarr;&nbsp;8"];
+"N2" -> "N5"  [color="#4A4A4A", fontsize=10, label="", penwidth=1, tooltip="1&nbsp;&rarr;&nbsp;4"];
+"N1" -> "N3"  [color="#4A4A4A", fontsize=10, label="", penwidth=1, tooltip="0&nbsp;&rarr;&nbsp;2"];
+"N4" -> "N7"  [color="#4A4A4A", fontsize=10, label="", penwidth=1, tooltip="3&nbsp;&rarr;&nbsp;6"];
+"N3" -> "N6"  [color="#4A4A4A", fontsize=10, label="", penwidth=1, tooltip="2&nbsp;&rarr;&nbsp;5"];
+"N2" -> "N4"  [color="#4A4A4A", fontsize=10, label="", penwidth=1, tooltip="1&nbsp;&rarr;&nbsp;3"];
+"N5" -> "N8"  [color="#4A4A4A", fontsize=10, label="", penwidth=1, tooltip="4&nbsp;&rarr;&nbsp;7"];
+}

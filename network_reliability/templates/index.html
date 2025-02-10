@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Reliability Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>Network Reliability Dashboard</h1>
+    </header>
+    <div class="container mt-4">
+        <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="data-tab" data-toggle="tab" href="#data" role="tab" aria-controls="data" aria-selected="true">Choisir les Données</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="view-csv-tab" data-toggle="tab" href="#view-csv" role="tab" aria-controls="view-csv" aria-selected="false">Afficher les Données</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="visualization-tab" data-toggle="tab" href="#visualization" role="tab" aria-controls="visualization" aria-selected="false">Visualisation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="model-tab" data-toggle="tab" href="#model" role="tab" aria-controls="model" aria-selected="false">Construction du Modèle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="report-tab" data-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="false">Rapport</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="dashboardTabsContent">
+            <!-- Onglet Choisir les Données -->
+            <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
+                <h3>Choisir les Données</h3>
+                <form id="data-entry-form" action="{% url 'data_entry' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="csv-file">Sélectionner un fichier CSV :</label>
+                        <input type="file" class="form-control" id="csv-file" name="csv-file" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Charger</button>
+                </form>
+            </div>
+
+            <!-- Onglet Afficher CSV -->
+            <div class="tab-pane fade" id="view-csv" role="tabpanel" aria-labelledby="view-csv-tab">
+                <h3>Afficher les Données</h3>
+                <div id="csv-content">
+                    <!-- Le contenu du fichier CSV sélectionné sera affiché ici -->
+                </div>
+            </div>
+
+            <!-- Onglet Visualisation -->
+            <div class="tab-pane fade" id="visualization" role="tabpanel" aria-labelledby="visualization-tab">
+                <h4>Visualisation</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>IEEE 9 Nodes Network</h3>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#graph9Nodes" aria-expanded="false" aria-controls="graph9Nodes">
+                            Show Graph 9 Nodes
+                        </button>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#inference9Nodes" aria-expanded="false" aria-controls="inference9Nodes">
+                            Show Inference 9 Nodes
+                        </button>
+                        <div class="collapse" id="graph9Nodes">
+                            <img src="{% url 'custom_static' 'graph_9_nodes.png' %}" alt="Graph 9 Nodes" class="img-fluid">
+                        </div>
+                        <div class="collapse" id="inference9Nodes">
+                            <img src="{% url 'custom_static' 'inference_9_nodes.png' %}" alt="Inference 9 Nodes" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>IEEE 14 Nodes Network</h3>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#graph14Nodes" aria-expanded="false" aria-controls="graph14Nodes">
+                            Show Graph 14 Nodes
+                        </button>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#inference14Nodes" aria-expanded="false" aria-controls="inference14Nodes">
+                            Show Inference 14 Nodes
+                        </button>
+                        <div class="collapse" id="graph14Nodes">
+                            <img src="{% url 'custom_static' 'graph_14_nodes.png' %}" alt="Graph 14 Nodes" class="img-fluid">
+                        </div>
+                        <div class="collapse" id="inference14Nodes">
+                            <img src="{% url 'custom_static' 'inference_14_nodes.png' %}" alt="Inference 14 Nodes" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Onglet Construire un Modèle -->
+            <div class="tab-pane fade" id="model" role="tabpanel" aria-labelledby="model-tab">
+                <h3>Construction du Modèle</h3>
+                <p>Choisissez un réseau pour construire un modèle de neurones :</p>
+                <button class="btn btn-primary" onclick="buildModel('ieee_9_nodes')">Construire modèle pour IEEE 9 Noeuds</button>
+                <button class="btn btn-secondary" onclick="buildModel('ieee_14_nodes')">Construire modèle pour IEEE 14 Noeuds</button>
+                <div id="model-result"></div>
+                <div id="model-visualization" style="display:none;">
+                    <h4>Matrice de Confusion</h4>
+                    <img id="confusion-matrix" src="" alt="Confusion Matrix" class="img-fluid">
+                    <h4>Précision du Modèle</h4>
+                    <p id="model-accuracy"></p>
+                    <h4>Rapport de Classification</h4>
+                    <pre id="classification-report"></pre>
+                    <h4>Graphe du Réseau Bayésien</h4>
+                    <img id="bayesian-network-graph" src="" alt="Bayesian Network Graph" class="img-fluid">
+                </div>
+            </div>
+
+            <!-- Onglet Rapport -->
+            <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">
+                <h3>Rapport</h3>
+                <p>Générer un rapport pour :</p>
+                <button class="btn btn-primary" onclick="generateReport('ieee_9_nodes')">Rapport pour IEEE 9 Noeuds</button>
+                <button class="btn btn-secondary" onclick="generateReport('ieee_14_nodes')">Rapport pour IEEE 14 Noeuds</button>
+                <div id="report-content"></div>
+   
+                    <!-- Les données d'inférence seront affichées ici -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 Network Reliability Dashboard</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
