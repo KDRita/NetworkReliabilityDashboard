@@ -29,8 +29,11 @@ L’application permet de :
 # 📂 Structure du Projet
 
 electra_project/
+
 ├── electra_project/            # Répertoire principal Django
+
 │   ├── __init__.py
+
 │   ├── settings.py             # Configuration du projet Django
 │   ├── urls.py                 # Routes principales de l’application
 │   ├── wsgi.py / asgi.py       # Déploiement du serveur
